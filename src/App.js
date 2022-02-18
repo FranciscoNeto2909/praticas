@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import Button from "./components/Button";
 
-function App() {
+export default function App() {
+  const list = ["João", "Maria", "Carol", "Antônio"]
+
+  const [showList, setShowList] = useState(false)
+  const handleShowList = () => {
+    setShowList(true)
+  }
+  const handleHideList = () => {
+    setShowList(false)
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Praticas do curso b7 web</h1>
+      <Button eventClick={handleShowList} text="Mostrar lista"/>
+      <Button eventClick={handleHideList} text="esconder lista"/>
+      <ul>
+        { showList && list.map((pessoa) => (
+          <li>{pessoa}</li>
+        ))}
+      </ul>
     </div>
   );
 }
-
-export default App;
