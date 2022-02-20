@@ -30,12 +30,12 @@ export default function App() {
   const handleShowList = () => {
     setShowList(!showList)
   }
- 
+
   return (
     <div>
       <h1>Praticas do curso b7 web</h1>
       <h2>Lista de participantes</h2>
-      <Button eventClick={handleShowList} text={showList ? "Esconder lista" : "Mostrar lista" }/>
+      <Button eventClick={handleShowList} text={showList ? "Esconder lista" : "Mostrar lista"} />
       <List list={list} showList={showList} />
     </div>
   );
