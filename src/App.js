@@ -10,19 +10,12 @@ export default function App() {
   const [loading, setLoading] = useState(false)
   const [title, setTitle] = useState("")
   const [body, setBody] = useState("")
-
-  /*Função normal:
-    function loadMovies(e) {
-      e.preventDefault()
-      fetch(link1)
-        .then(res => res.json())
-        .then(res => setMovies(res))}*/
-
+  
   async function asyncLoadMovies(e) {
     e.preventDefault()
     try {
       setLoading(true)
-      const res  = await api.getPosts()
+      const res  = await api.getMovies()
       setLoading(false)
       setMovies(res)
     } catch (e) {
