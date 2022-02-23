@@ -3,11 +3,9 @@ import "./App.css"
 import Card from "./components/card/Card";
 import PostForm from "./components/form/PostForm";
 import Loading from "./components/loading/Loading";
-
+import { api } from "./Api";
 export default function App() {
 
-  const link1 = "https://api.b7web.com.br/cinema/"
-  const link2 = "https://jsonplaceholder.typicode.com/posts"
   const [movies, setMovies] = useState([])
   const [loading, setLoading] = useState(false)
   const [title, setTitle] = useState("")
@@ -24,10 +22,9 @@ export default function App() {
     e.preventDefault()
     try {
       setLoading(true)
-      const res = await fetch(link1)
-      const mvs = await res.json()
+      const res  = await api.getPosts()
       setLoading(false)
-      setMovies(mvs)
+      setMovies(res)
     } catch (e) {
       console.log(e)
     }
@@ -41,19 +38,7 @@ export default function App() {
   async function handleAddPost(e) {
     e.preventDefault()
     if (title && body) {
-      const res = await fetch(link2, {
-        method: "POST",
-        body: JSON.stringify(
-          {
-            title: title,
-            body: body,
-            userId: 1
-          }),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
-      const json = res.json()
+     const json = api.setPosts(title, body)
       console.log(json)
       alert("Veja o resultado no console")
     } else {
