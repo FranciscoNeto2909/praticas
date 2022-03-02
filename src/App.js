@@ -1,43 +1,56 @@
 import React, { useState } from "react";
-import Button from "./components/Button";
-import List from "./components/listas/List";
+import usePeapleList from "./reducer/PepleList";
 
 export default function App() {
-  const list = [
-    {
-      name: "João",
-      age: 19
-    },
-    {
-      name: "Maria",
-      age: 12
-    },
-    {
-      name: "Antôno",
-      age: 29
-    }
-    , {
-      name: "Carol",
-      age: 23
-    },
-    {
-      name: "Neto",
-      age: 20
-    }]
-
-  const [showList, setShowList] = useState(false)
-
-  const handleShowList = () => {
-    setShowList(!showList)
+  const[state, dispatch] =  usePeapleList()
+  const[name, setName] = useState('')
+  function handleAddName(e){
+    setName(e.target.value)
+    return name
   }
- 
+  function handleAddPeaple(){
+    if(name){
+      dispatch({
+        type:"ADD",
+        payload:{
+          name:name
+        }
+      })
+      setName("")
+    }else{
+      alert("Digite seu nome")
+    }
+  }
+  const handleRemovePeaple = (id) => {
+    dispatch({
+      type:'DEL',
+      payload:{id}
+    })
+  }
+  function handleOrdenatePeaple(){
+    dispatch({
+      type:'ORDER'
+    })
+    console.log(state)
+  }
   return (
-    <div>
-      <h1>Praticas do curso b7 web</h1>
-      <h2>Lista de participantes</h2>
-      <Button eventClick={handleShowList} text={showList ? "Esconder lista" : "Mostrar lista" }/>
-      <List list={list} showList={showList} />
-    </div>
+    <>
+      <div>
+        <p>Nomes:</p>
+        <ul>
+          {state.map((pessoa, i) =>(
+            <li key={i} className="my-2 captalize">{pessoa.name}
+            <button onClick={()=>{handleRemovePeaple(pessoa.id)}} className="btn btn-sm btn-primary ms-2">Remover</button></li>
+          ))}
+        </ul>
+      </div>
+
+      <form>
+        <label>Nome</label>
+        <input type="text" value={name} onChange={handleAddName}/>
+      </form>
+      <button onClick={handleAddPeaple} className="btn btn-primary mt-2 me-2">Adicionar</button>
+      <button onClick={handleOrdenatePeaple} className="btn btn-primary mt-2">Ordenar</button>
+    </>
   );
-  //Observação: Ao renderizar listas o valor sera retornado automaticamente se passado em um parenteses ao invez de chaves.
 }
