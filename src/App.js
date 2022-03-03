@@ -1,56 +1,23 @@
-import React, { useState } from "react";
-import usePeapleList from "./reducer/PepleList";
+import { useState } from "react";
+import Form from "./components/Form";
+import Users from "./reducer/Users";
 
 export default function App() {
-  const[state, dispatch] =  usePeapleList()
-  const[name, setName] = useState('')
-  function handleAddName(e){
-    setName(e.target.value)
-    return name
-  }
-  function handleAddPeaple(){
-    if(name){
-      dispatch({
-        type:"ADD",
-        payload:{
-          name:name
-        }
-      })
-      setName("")
-    }else{
-      alert("Digite seu nome")
-    }
-  }
-  const handleRemovePeaple = (id) => {
-    dispatch({
-      type:'DEL',
-      payload:{id}
-    })
-  }
-  function handleOrdenatePeaple(){
-    dispatch({
-      type:'ORDER'
-    })
-    console.log(state)
-  }
+  const [state, dispatch] = Users();
+  const [adm, setAdm] = useState(false)
   return (
     <>
-      <div>
-        <p>Nomes:</p>
-        <ul>
-          {state.map((pessoa, i) =>(
-            <li key={i} className="my-2 captalize">{pessoa.name}
-            <button onClick={()=>{handleRemovePeaple(pessoa.id)}} className="btn btn-sm btn-primary ms-2">Remover</button></li>
-          ))}
-        </ul>
-      </div>
-
-      <form>
-        <label>Nome</label>
-        <input type="text" value={name} onChange={handleAddName}/>
-      </form>
-      <button onClick={handleAddPeaple} className="btn btn-primary mt-2 me-2">Adicionar</button>
-      <button onClick={handleOrdenatePeaple} className="btn btn-primary mt-2">Ordenar</button>
+    <h1 className="text-center mb-5">Cadastro de usuários</h1>
+      <Form dispatch={dispatch}/>
+      { adm &&
+          state.map((user, i)=>(
+          <div key={i} className="border border-2 border-primary mt-3 p-2 rounded col-5">
+            <h3 className="text-center cap">{user.name}</h3>
+            <p className="text-center">{user.email}</p>
+          </div>
+          ))
+      }
+      <button onClick={()=>setAdm(true)}>Adm</button>
     </>
   );
 }
