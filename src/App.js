@@ -41,7 +41,7 @@ export default function App() {
   }
   return (
     <div>
-      <h1 className="text-center">Praticas de requisições</h1>
+      <h1 className="text-center">Praticas de requisições http</h1>
       <h2>Requisições com fetch:</h2>
       <p>Requisições são formas de solicitar o acesso aos dados de um link, api ou banco de dados. existem varios tipos de requisições com por exemplo GET, POST, PUT e DELETE.</p>
       <h3>GET:</h3>
