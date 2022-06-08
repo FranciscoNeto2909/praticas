@@ -1,4 +1,3 @@
-
 import axios from "axios"
 const link1 = "https://api.b7web.com.br/cinema/"
 const link2 = "https://jsonplaceholder.typicode.com/posts"

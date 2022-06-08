@@ -18,6 +18,7 @@ export default function App() {
       const res  = await api.getMovies()
       setLoading(false)
       setMovies(res)
+      console.log(typeof movies)
     } catch (e) {
       console.log(e)
     }
@@ -42,7 +43,7 @@ export default function App() {
     <div>
       <h1 className="text-center">Praticas do curso b7 web</h1>
       <h2>Requisições com fetch:</h2>
-      <p>Requisições são formas de solicitar o acesso aos dados de um link, api ou banco de dados. existem varios tipos de requisições mas os mais famosos são: GET, POST, PUT e DELETE.</p>
+      <p>Requisições são formas de solicitar o acesso aos dados de um link, api ou banco de dados. existem varios tipos de requisições com por exemplo GET, POST, PUT e DELETE.</p>
       <h3>GET:</h3>
       <p>A requisição do tipo GET retorna os dados.</p>
       <p>O exemplo a seguir acessa os filmes de uma api e os retorna para serem manipulados pelo programador</p>
